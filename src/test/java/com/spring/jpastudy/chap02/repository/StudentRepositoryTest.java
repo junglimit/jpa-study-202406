@@ -108,7 +108,7 @@ void nativeSQLTest () {
     String name = "춘식이";
     String city = "제주도";
     //when
-    List<Student> students = studentRepository.getStudentByNameOrCity(name, city);
+    List<Student> students = studentRepository.getStudentByNameOrCity2(name, city);
     //then
     System.out.println("\n\n\n\n");
     students.forEach(System.out::println);

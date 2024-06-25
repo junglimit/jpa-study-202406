@@ -31,4 +31,7 @@ public interface StudentRepository extends JpaRepository<Student, String> {
     @Query(value = "SELECT * FROM tbl_student WHERE stu_name = :snm OR city = :city" , nativeQuery = true)
     List<Student> getStudentByNameOrCity(@Param("snm")String name, @Param("city") String city);
 
+    @Query(value = "SELECT * FROM tbl_student WHERE stu_name = ?1 OR city = ?2" , nativeQuery = true)
+    List<Student> getStudentByNameOrCity2(String name, String city);
+
 }
