@@ -101,6 +101,20 @@ void findByMajorContainingTest () {
     System.out.println("\n\n\n\n");
 }
 
+@Test
+@DisplayName("도시 또는 이름으로 학생을 조회")
+void nativeSQLTest () {
+    //given
+    String name = "춘식이";
+    String city = "제주도";
+    //when
+    List<Student> students = studentRepository.getStudentByNameOrCity(name, city);
+    //then
+    System.out.println("\n\n\n\n");
+    students.forEach(System.out::println);
+    System.out.println("\n\n\n\n");
+}
+
 
 
 }
