@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.spring.jpastudy.chap01.entity.Product.*;
@@ -92,6 +93,45 @@ class ProductRepositoryTest {
         System.out.println("\n\n\n\n\nfoundProduct = " + foundProduct + "\n\n\n\n");
     }
 
+    @Test
+    @DisplayName("상품을 전체조회하면 상품의 총 개수가 4개이다")
+    void findAllTest () {
+        //given
+
+        //when
+        List<Product> productList = productRepository.findAll();
+        //then
+        System.out.println("\n\n\n\n");
+        productList.forEach(System.out::println);
+        System.out.println("\n\n\n\n");
+
+        assertEquals(4, productList.size());
+    }
+
+
+    @Test
+    @DisplayName("2번 상품의 이름과 카테고리를 수정한다")
+    void modifyTest () {
+        //given
+        Long id = 2L;
+        String newName = "청소기";
+        Product.Category newCategory = ELECTRONIC;
+        //when
+
+        /*
+            jpa 에서는 수정 메서드가 없음
+            단일 조회를 수행하고 setter 를 통해 값을 변경한뒤
+            다시 save 를 하면 UPDATE 문이 나감
+         */
+        Product product = productRepository.findById(id).orElse(null);
+        product.setName(newName);
+        product.setCategory(newCategory);
+
+        Product saved = productRepository.save(product);
+
+        //then
+        assertEquals(newName, saved.getName());
+    }
 
 
 }
