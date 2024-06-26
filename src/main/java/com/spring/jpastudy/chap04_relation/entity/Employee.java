@@ -30,6 +30,13 @@ public class Employee {
     @JoinColumn(name = "dept_id") // FK 컬럼명
     private Department department;
 
+
+    // 양방향 매핑할때 메서드를 사용해서 따로 반대편 엔터티 수정을 일일히 하지 않고 한번에 해결
+    public void changeDepartment(Department department) {
+        this.department = department;
+        department.getEmployees().add(this);
+    }
+
 //    @ManyToOne
 //    @JoinColumn(name = "receive_dept_id")
 //    private Department department2;
