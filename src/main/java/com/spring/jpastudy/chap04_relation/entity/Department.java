@@ -46,6 +46,7 @@ public class Department {
      */
 
     @OneToMany(mappedBy = "department", orphanRemoval = true, cascade = CascadeType.REMOVE)
+    @Builder.Default
     private List<Employee> employees = new ArrayList<>();
 
 

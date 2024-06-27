@@ -27,6 +27,7 @@ public class User {
 
     // mappedBy 엔 꼭 필드명을 넣기
     @OneToMany(mappedBy = "user",orphanRemoval = true, cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Purchase> purchaseList = new ArrayList<>();
 
 }
