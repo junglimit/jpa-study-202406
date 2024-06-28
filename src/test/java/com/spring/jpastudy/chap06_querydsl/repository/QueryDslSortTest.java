@@ -79,6 +79,37 @@ class QueryDslSortTest {
     }
 
 
+    @Test
+    @DisplayName("페이징 처리")
+    void pagingTest () {
+        //given
+        int pageNo = 1;
+        int amount = 2;
+
+        //when
+        List<Idol> pagedIdols = factory.selectFrom(idol)
+                .orderBy(idol.age.desc())
+                .offset((pageNo - 1) * amount) // limit(0,10) 말고 offset 으로 최소값 지정
+                .limit(amount)
+                .fetch();
+
+        // 총 데이터 수
+        Long totalCount = Optional.ofNullable(factory
+                .select(idol.count())
+                .from(idol)
+                .fetchOne()).orElse(0L);
+
+        //then
+        System.out.println("\n\n\n");
+        pagedIdols.forEach(System.out::println);
+        System.out.println("\n\n\n");
+
+        System.out.println("\ntotalCount = " + totalCount);
+        assertTrue(totalCount == 5);
+    }
+
+
+
 
 
 
