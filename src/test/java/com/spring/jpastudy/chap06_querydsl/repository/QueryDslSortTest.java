@@ -190,7 +190,7 @@ class QueryDslSortTest {
         // when
         List<Idol> pagedIdols = factory
                 .selectFrom(idol)
-                .where(idol.group.groupName.eq(groupName))
+                .where(idol.group.groupName.eq(groupName)) // cross join 이 됨 (성능최적화문제)
                 .orderBy(idol.idolName.asc())
                 .offset(pageNumber * pageSize)
                 .limit(pageSize)
